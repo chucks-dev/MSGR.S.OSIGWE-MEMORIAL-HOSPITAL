@@ -5,7 +5,6 @@ const ADMIN_PATH = process.env.ADMIN_PATH || "secure-management-portal-x7k29";
 /**
  * Security headers on every response.
  *
- * The Content-Security-Policy allows only our own scripts and Paystack's checkout.
  * Note that Next.js needs 'unsafe-inline' for its own inline bootstrap scripts unless
  * you add nonce handling. That is documented in the README as a hardening step.
  */

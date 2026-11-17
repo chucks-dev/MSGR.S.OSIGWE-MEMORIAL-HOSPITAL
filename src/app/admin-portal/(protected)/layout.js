@@ -14,7 +14,6 @@ const LINKS = [
   { path: "/appointments", label: "Appointments" },
   { path: "/doctors", label: "Doctors / Staff" },
   { path: "/services", label: "Services" },
-  { path: "/treasury", label: "Treasury" },
   { path: "/news", label: "News" },
   { path: "/gallery", label: "Gallery" },
   { path: "/messages", label: "Messages" },

@@ -9,7 +9,6 @@ const LINKS = [
   { href: "/portal", label: "Overview" },
   { href: "/portal/profile", label: "My Profile" },
   { href: "/portal/appointments", label: "Appointments" },
-  { href: "/portal/donations", label: "Donations" },
   { href: "/portal/notifications", label: "Notifications" },
 ];
 

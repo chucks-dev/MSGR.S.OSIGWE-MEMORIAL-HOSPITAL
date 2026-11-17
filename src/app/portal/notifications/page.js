@@ -18,7 +18,7 @@ export default async function NotificationsPage() {
     <div className="panel">
       <h1 style={{ fontSize: "1.5rem" }}>Notifications</h1>
       {notifications.length === 0 ? (
-        <EmptyState title="Nothing here yet">You will see updates about your appointments and donations here.</EmptyState>
+        <EmptyState title="Nothing here yet">You will see updates about your appointments here.</EmptyState>
       ) : (
         <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "0.75rem" }}>
           {notifications.map((n) => (

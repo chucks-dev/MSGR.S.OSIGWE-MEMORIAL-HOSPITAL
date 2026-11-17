@@ -2,21 +2,20 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
 import { Badge } from "@/components/Bits";
-import { APPOINTMENT_BADGE, formatDate, formatTime, nairaFromKobo } from "@/lib/format";
+import { APPOINTMENT_BADGE, formatDate, formatTime } from "@/lib/format";
 
 export const metadata = { title: "My Dashboard" };
 
 export default async function PortalOverview() {
   const user = await getCurrentUser();
 
-  const [upcoming, apptCount, donationTotal, recentAppts, recentNotifs] = await Promise.all([
+  const [upcoming, apptCount, recentAppts, recentNotifs] = await Promise.all([
     db.appointment.findFirst({
       where: { userId: user.id, status: { in: ["PENDING", "CONFIRMED"] }, preferredDate: { gte: new Date(new Date().toDateString()) } },
       orderBy: { preferredDate: "asc" },
       include: { service: true, doctor: true },
     }),
     db.appointment.count({ where: { userId: user.id } }),
-    db.donation.aggregate({ where: { userId: user.id, status: "SUCCESSFUL" }, _sum: { amountKobo: true } }),
     db.appointment.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" }, take: 3, include: { service: true } }),
     db.notification.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" }, take: 3 }),
   ]);
@@ -26,7 +25,7 @@ export default async function PortalOverview() {
       <h1 style={{ fontSize: "1.8rem" }}>Welcome back, {user.fullName.split(" ")[0]}</h1>
       <p style={{ color: "var(--ink-soft)" }}>Here is a quick look at your account.</p>
 
-      <div className="grid cols-4" style={{ marginBottom: "1.5rem" }}>
+      <div className="grid cols-3" style={{ marginBottom: "1.5rem" }}>
         <div className="stat">
           <div className="lbl">Upcoming appointment</div>
           <div className="num" style={{ fontSize: "1.15rem" }}>
@@ -36,10 +35,6 @@ export default async function PortalOverview() {
         <div className="stat">
           <div className="num">{apptCount}</div>
           <div className="lbl">Total appointments</div>
-        </div>
-        <div className="stat">
-          <div className="num">{nairaFromKobo(donationTotal._sum.amountKobo || 0)}</div>
-          <div className="lbl">Total donations</div>
         </div>
         <div className="stat">
           <div className="num">{recentNotifs.filter((n) => !n.isRead).length}</div>

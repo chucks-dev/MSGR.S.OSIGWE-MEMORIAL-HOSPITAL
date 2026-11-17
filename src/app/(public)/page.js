@@ -34,9 +34,6 @@ export default async function HomePage() {
               <Link href="/appointments" className="btn btn-light">
                 Book an Appointment
               </Link>
-              <Link href="/treasury" className="btn btn-outline">
-                Support a Patient
-              </Link>
             </div>
           </div>
           <div className="hero-media">
@@ -135,19 +132,6 @@ export default async function HomePage() {
               <p>Schedule an appointment with our healthcare team.</p>
             </div>
             <Link href="/appointments" className="btn btn-primary">Book an Appointment</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Treasury preview */}
-      <section className="section" style={{ paddingTop: 0 }} aria-labelledby="give-title">
-        <div className="wrap">
-          <div className="give-band">
-            <div>
-              <h2 id="give-title">Give Hope. Support a Life.</h2>
-              <p>Your contribution can help provide medical care to someone who needs it.</p>
-            </div>
-            <Link href="/treasury" className="btn btn-light">Donate Now</Link>
           </div>
         </div>
       </section>

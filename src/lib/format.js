@@ -1,7 +1,3 @@
-export const naira = (n) => `₦${Number(n).toLocaleString("en-NG")}`;
-
-export const nairaFromKobo = (k) => naira(k / 100);
-
 export function formatDate(d, opts = { day: "numeric", month: "long", year: "numeric" }) {
   return new Date(d).toLocaleDateString("en-NG", opts);
 }
@@ -27,13 +23,6 @@ export const APPOINTMENT_BADGE = {
   PENDING: { label: "Pending", cls: "amber" },
   CONFIRMED: { label: "Confirmed", cls: "green" },
   COMPLETED: { label: "Completed", cls: "" },
-  CANCELLED: { label: "Cancelled", cls: "gray" },
-};
-
-export const DONATION_BADGE = {
-  PENDING: { label: "Pending", cls: "amber" },
-  SUCCESSFUL: { label: "Successful", cls: "green" },
-  FAILED: { label: "Failed", cls: "red" },
   CANCELLED: { label: "Cancelled", cls: "gray" },
 };
 

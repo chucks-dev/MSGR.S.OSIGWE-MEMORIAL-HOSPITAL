@@ -14,13 +14,6 @@ enum AppointmentStatus {
   CANCELLED
 }
 
-enum DonationStatus {
-  PENDING
-  SUCCESSFUL
-  FAILED
-  CANCELLED
-}
-
 enum AdminRole {
   SUPER_ADMIN
   STAFF
@@ -35,9 +28,8 @@ model User {
   passwordHash String
   isActive     Boolean       @default(true)
   createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  updatedAt   DateTime      @updatedAt
   appointments Appointment[]
-  donations    Donation[]
   notifications Notification[]
 
   @@index([createdAt])
@@ -103,30 +95,6 @@ model Appointment {
   @@index([userId])
   @@index([status])
   @@index([preferredDate])
-}
-
-model Donation {
-  id          String         @id @default(cuid())
-  reference   String         @unique
-  userId      String?
-  donorName   String
-  donorEmail  String
-  donorPhone  String
-  isAnonymous Boolean        @default(false)
-  // Stored in kobo (integer) to avoid floating point errors.
-  amountKobo  Int
-  purpose     String
-  status      DonationStatus @default(PENDING)
-  paidAt      DateTime?
-  gatewayResponse String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-
-  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-
-  @@index([status])
-  @@index([userId])
-  @@index([createdAt])
 }
 
 model Article {
@@ -212,11 +180,4 @@ model RateLimit {
   key         String   @id
   count       Int
   windowStart DateTime
-}
-
-// Webhook events already processed, so replays cannot double-count.
-model WebhookEvent {
-  id          String   @id
-  provider    String
-  processedAt DateTime @default(now())
 }

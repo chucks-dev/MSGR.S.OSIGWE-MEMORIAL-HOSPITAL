@@ -1,13 +1,12 @@
 # Community Care Hospital — website & patient portal
 
-A full-stack hospital website built with Next.js (App Router), PostgreSQL (via Prisma)
-and Paystack for donations.
+A full-stack hospital website built with Next.js (App Router) and PostgreSQL (via
+Prisma).
 
 ## 1. Requirements
 
 - Node.js 20 or later
 - A PostgreSQL database (local, or a hosted one like Supabase/Neon/Railway)
-- A Paystack account (test keys are fine to start)
 
 ## 2. Setup
 
@@ -23,8 +22,7 @@ Edit `.env`:
 - `ADMIN_PATH` — change this to your own private admin URL segment.
 - `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` — the first admin account. Password must
   be at least 12 characters. **Change this password after your first login.**
-- `PAYSTACK_SECRET_KEY` — from your Paystack dashboard (Settings → API Keys).
-- `NEXT_PUBLIC_SITE_URL` — the public URL of your site (used for Paystack's callback).
+- `NEXT_PUBLIC_SITE_URL` — the public URL of your site.
 
 Then create the database and seed it:
 
@@ -44,21 +42,7 @@ npm run dev
 - Public site: `http://localhost:3000`
 - Admin portal: `http://localhost:3000/<ADMIN_PATH>/login` (the path you set in `.env`)
 
-## 3. Configure Paystack
-
-In your Paystack dashboard, set the webhook URL to:
-
-```
-https://YOUR-DOMAIN/api/paystack/webhook
-```
-
-The webhook is how donations are confirmed even if a donor closes their browser
-before being redirected back. The redirect-based confirmation (`/treasury/thanks`)
-is a convenience for the donor, not the source of truth — `settleDonation()` in
-`src/lib/paystack.js` is the only code path that marks a donation successful, and it
-always re-checks with Paystack directly.
-
-## 4. Adding your hospital's real content
+## 3. Adding your hospital's real content
 
 Nothing about a real hospital, doctor, phone number or address was invented. Log in
 to the admin portal and:
@@ -72,7 +56,7 @@ to the admin portal and:
    the "Hospital" category, so upload one there first).
 5. Go to **News** and replace or delete the welcome article.
 
-## 5. Security notes
+## 4. Security notes
 
 - Sessions are signed, httpOnly cookies. Patient and admin sessions use separate
   cookies, so one can never be used as the other.
@@ -87,15 +71,10 @@ to the admin portal and:
   path in `ADMIN_PATH` is rewritten to it.
 - Uploaded images are checked by their actual file bytes, not their filename or
   declared type, and SVG is rejected (SVGs can contain scripts).
-- Donation amounts are decided by the server and verified against Paystack directly;
-  the browser cannot mark a donation successful.
-- The CSV export escapes values that could be interpreted as spreadsheet formulas.
 
 ### Before going live
 
 - [ ] Change `SESSION_SECRET`, `ADMIN_PATH`, and the seeded admin password.
-- [ ] Switch `PAYSTACK_SECRET_KEY` to a live key once you are ready to accept real
-      donations, and update the Paystack webhook URL to your live domain.
 - [ ] Serve the site over HTTPS (required for secure cookies in production).
 - [ ] Consider adding two-factor authentication for admin accounts (not included in
       this version).
@@ -108,21 +87,18 @@ to the admin portal and:
       Protection Act (NDPA) 2023 — the included pages are a starting template, not
       legal advice.
 
-## 6. What this version deliberately does not do
+## 5. What this version deliberately does not do
 
 - It is not an electronic medical record system. Appointment "reason" and "message"
   fields are short free text, not structured clinical data, and patients are asked
   not to include detailed medical history in them.
-- It does not store card details. All payment happens on Paystack's own page.
-- It does not let admins mark a donation as paid — only a verified Paystack
-  response can do that.
 
-## 7. Project structure
+## 6. Project structure
 
 ```
 prisma/schema.prisma       Database schema
 prisma/seed.mjs            First admin, starter services, welcome article
-src/lib/                   Server logic: db, session, security, validation, paystack
+src/lib/                   Server logic: db, session, security, validation
 src/components/            Shared UI and forms (client and server components)
 src/app/(public)/          Public pages: home, about, services, team, contact, etc.
 src/app/(auth)/            Login, signup, forgot-password

@@ -107,28 +107,6 @@ export const contactSchema = z.object({
   message: z.string().trim().min(10, "Write at least 10 characters.").max(3000),
 });
 
-export const DONATION_PURPOSES = [
-  "General Hospital Support",
-  "Patient Medical Treatment",
-  "Medication",
-  "Emergency Care",
-  "Maternal & Child Care",
-];
-
-export const donationSchema = z.object({
-  // Naira, whole numbers. Converted to kobo on the server.
-  amountNaira: z.coerce
-    .number({ invalid_type_error: "Enter an amount." })
-    .int("Enter a whole number of naira.")
-    .min(500, "The minimum donation is ₦500.")
-    .max(5_000_000, "For gifts above ₦5,000,000, please contact the hospital."),
-  purpose: z.enum(DONATION_PURPOSES, { errorMap: () => ({ message: "Choose a purpose." }) }),
-  donorName: z.string().trim().min(2, "Enter your name.").max(100),
-  donorEmail: email,
-  donorPhone: phone,
-  isAnonymous: z.boolean().optional().default(false),
-});
-
 /** Turns a Zod error into { fieldName: "message" } for forms. */
 export function fieldErrors(zodError) {
   const out = {};

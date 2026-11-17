@@ -54,9 +54,9 @@ async function main() {
         title: "Welcome to our new website",
         category: "Hospital News",
         author: "Hospital Administration",
-        excerpt: "You can now book appointments and support patients online.",
+        excerpt: "You can now create an account and book appointments online.",
         content:
-          "This is a placeholder article. You can now create an account, book an appointment and support patients through the Treasury page.\n\nAn administrator can replace or delete this article from the admin portal.",
+          "This is a placeholder article. You can now create an account and book an appointment online.\n\nAn administrator can replace or delete this article from the admin portal.",
         isPublished: true,
         publishedAt: new Date(),
       },
