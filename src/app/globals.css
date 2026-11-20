@@ -81,8 +81,14 @@ h3 { font-size: 1.25rem; }
 
 p { margin: 0 0 1em; max-width: 68ch; }
 
-a { color: var(--navy-700); text-underline-offset: 3px; }
-a:hover { color: var(--navy); }
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+a:not(.btn) { color: var(--navy-700); text-underline-offset: 3px; }
+a:not(.btn):hover { color: var(--navy); }
 
 :focus-visible {
   outline: 3px solid #2b6cb0;

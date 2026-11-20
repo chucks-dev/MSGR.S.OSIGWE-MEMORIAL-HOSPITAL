@@ -22,7 +22,7 @@ export const SETTING_FIELDS = [
     key: "aboutIntro",
     label: "About: introduction",
     default:
-      "MSGR.S.OSIGWE, MEMORIAL HOSPITAL is a placeholder description. Replace this text from Website Settings with a short introduction to your hospital and the community you serve.",
+      "MSGR.S.OSIGWE, MEMORIA HOSPITAL is a placeholder description. Replace this text from Website Settings with a short introduction to your hospital and the community you serve.",
     group: "About page",
     long: true,
   },
