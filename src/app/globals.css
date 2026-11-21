@@ -379,17 +379,6 @@ a:not(.btn):hover { color: var(--navy); }
   .hero-media { min-height: 0; }
 }
 
-.hero-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.5rem;
-  color: #d6e2f1;
-  font-weight: 600;
-}
-.hero-brand .brand-mark { background: #fff; }
-.hero-brand .brand-mark svg { color: var(--navy); }
-
 /* Quick assurance strip */
 .assure {
   background: var(--blue-soft);

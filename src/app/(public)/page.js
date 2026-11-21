@@ -2,7 +2,6 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { getSettings, toWhatsAppHref } from "@/lib/settings";
 import { Icon, serviceIcon } from "@/components/Icons";
-import { BrandMark } from "@/components/Header";
 import { Photo } from "@/components/Bits";
 import { formatDate } from "@/lib/format";
 import ContactList from "@/components/ContactList";
@@ -24,10 +23,6 @@ export default async function HomePage() {
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-grid">
           <div className="hero-copy">
-            <div className="hero-brand">
-              <BrandMark />
-              <span>{s.hospitalName}</span>
-            </div>
             <h1 id="hero-title">{s.heroHeadline}</h1>
             <p>{s.heroText}</p>
             <div className="btn-row" style={{ marginTop: "1.5rem" }}>
